@@ -6,6 +6,12 @@ const tracksData = [
     sound: "crescent-moon",
   },
   {
+    src: "lofigirl",
+    name: "Winter Study Chill",
+    desc: "Winter Chill",
+    sound: "winter-lofi-mix-relaxing-music-to-chill-study",
+  },
+  {
     src: 2,
     name: "Ghost Celestia",
     desc: "Ethereal Journey",
