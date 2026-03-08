@@ -15,16 +15,43 @@ function useAudioPlayer() {
   const [audio, setAudio] = useState(new Audio());
   const trackIdPlaying = useRef(null);
 
+  const pauseTrack = () => {
+    audio.pause();
+    setIsPlaying(false);
+  };
+
+  const resumeTrack = () => {
+    if (trackIdPlaying.current == null) return;
+
+    audio
+      .play()
+      .then(() => {
+        setIsPlaying(true);
+      })
+      .catch((error) => {
+        console.log("Error playing media: ", error);
+      });
+  };
+
+  const togglePlayPause = () => {
+    if (trackIdPlaying.current == null) return;
+
+    if (isPlaying) {
+      pauseTrack();
+      return;
+    }
+
+    resumeTrack();
+  };
+
   const handleClick = (event) => {
     const audioSrc = event.target.getAttribute("data-audio-src");
     const trackId = event.target.getAttribute("data-track-id");
 
     if (trackId == trackIdPlaying.current) {
-      //same track clicked by the user, so pause the song; assume song is already playing
-      audio.pause();
-      audio.currentTime = 0;
-      setIsPlaying(false);
-      trackIdPlaying.current = null;
+      // same track clicked by the user, so toggle pause/resume
+      togglePlayPause();
+      return;
     } else {
       //if audio is already playing, stop it, and play the new audio
       if (isPlaying) {
@@ -71,7 +98,15 @@ function useAudioPlayer() {
     trackIdPlaying.current = null;
   };
 
-  return { isPlaying, handleClick, trackIdPlaying, stopTrack };
+  return {
+    isPlaying,
+    handleClick,
+    trackIdPlaying,
+    pauseTrack,
+    resumeTrack,
+    togglePlayPause,
+    stopTrack,
+  };
 }
 
 export default useAudioPlayer;

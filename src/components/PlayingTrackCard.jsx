@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 
-const PlayingTrackCard = ({ track, onPause }) => {
+const PlayingTrackCard = ({ track, isPlaying, onPlayPause }) => {
   if (!track) return null;
 
   return (
     <div className="mb-5 animate-fade-in">
       <div
         className="relative overflow-hidden rounded-xl cursor-pointer group"
-        onClick={onPause}
+        onClick={onPlayPause}
       >
         <img
           src={`/assets/background/${track.src}.gif`}
@@ -30,13 +30,15 @@ const PlayingTrackCard = ({ track, onPause }) => {
                 <h2 className="text-white font-semibold text-lg sm:text-xl truncate">
                   {track.name}
                 </h2>
-                <img
-                  src="/assets/music-playing-animation.gif"
-                  alt="Playing"
-                  width={22}
-                  height={12}
-                  className="invert shrink-0"
-                />
+                {isPlaying ? (
+                  <img
+                    src="/assets/music-playing-animation.gif"
+                    alt="Playing"
+                    width={22}
+                    height={12}
+                    className="invert shrink-0"
+                  />
+                ) : null}
               </div>
               <p className="text-gray-300 text-sm mt-0.5">{track.desc}</p>
               <span className="inline-block mt-2 text-xs text-green-400 font-medium tracking-wide uppercase">
@@ -48,16 +50,30 @@ const PlayingTrackCard = ({ track, onPause }) => {
           <button
             type="button"
             className="shrink-0 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors duration-200"
-            aria-label="Pause track"
+            aria-label={isPlaying ? "Pause track" : "Play track"}
+            onClick={(event) => {
+              event.stopPropagation();
+              onPlayPause();
+            }}
           >
-            <svg
-              className="w-5 h-5 text-white"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <rect x="6" y="4" width="4" height="16" rx="1" />
-              <rect x="14" y="4" width="4" height="16" rx="1" />
-            </svg>
+            {isPlaying ? (
+              <svg
+                className="w-5 h-5 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <rect x="6" y="4" width="4" height="16" rx="1" />
+                <rect x="14" y="4" width="4" height="16" rx="1" />
+              </svg>
+            ) : (
+              <svg
+                className="w-5 h-5 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            )}
           </button>
         </div>
       </div>

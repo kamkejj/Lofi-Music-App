@@ -10,13 +10,11 @@ import useAudioPlayer from "../lib/useAudioPlayer";
  * @returns {JSX.Element} The rendered Tracks component.
  */
 const Tracks = () => {
-  const { isPlaying, handleClick, trackIdPlaying, stopTrack } =
+  const { isPlaying, handleClick, trackIdPlaying, togglePlayPause } =
     useAudioPlayer();
 
   const activeTrack =
-    isPlaying && trackIdPlaying.current != null
-      ? tracksData[trackIdPlaying.current]
-      : null;
+    trackIdPlaying.current != null ? tracksData[trackIdPlaying.current] : null;
 
   return (
     <>
@@ -24,7 +22,11 @@ const Tracks = () => {
         <h1 className="text-gray-400 font-medium text-xl bg-slate-800 bg-opacity-50 rounded-full inline-block px-5 py-2 ">
           Tracks
         </h1>
-        <PlayingTrackCard track={activeTrack} onPause={stopTrack} />
+        <PlayingTrackCard
+          track={activeTrack}
+          isPlaying={isPlaying}
+          onPlayPause={togglePlayPause}
+        />
         <HorizontalScrollWithArrows contentClassName="lg:justify-between">
           {tracksData.map((track, index) => {
             return (
