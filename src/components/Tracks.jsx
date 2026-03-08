@@ -1,4 +1,5 @@
 import TrackCard from "@/components/TrackCard";
+import PlayingTrackCard from "@/components/PlayingTrackCard";
 import HorizontalScrollWithArrows from "@/components/HorizontalScrollWithArrows";
 import tracksData from "../data/tracks";
 import useAudioPlayer from "../lib/useAudioPlayer";
@@ -9,7 +10,13 @@ import useAudioPlayer from "../lib/useAudioPlayer";
  * @returns {JSX.Element} The rendered Tracks component.
  */
 const Tracks = () => {
-  const { isPlaying, handleClick, trackIdPlaying } = useAudioPlayer();
+  const { isPlaying, handleClick, trackIdPlaying, stopTrack } =
+    useAudioPlayer();
+
+  const activeTrack =
+    isPlaying && trackIdPlaying.current != null
+      ? tracksData[trackIdPlaying.current]
+      : null;
 
   return (
     <>
@@ -17,6 +24,7 @@ const Tracks = () => {
         <h1 className="text-gray-400 font-medium text-xl bg-slate-800 bg-opacity-50 rounded-full inline-block px-5 py-2 ">
           Tracks
         </h1>
+        <PlayingTrackCard track={activeTrack} onPause={stopTrack} />
         <HorizontalScrollWithArrows contentClassName="lg:justify-between">
           {tracksData.map((track, index) => {
             return (

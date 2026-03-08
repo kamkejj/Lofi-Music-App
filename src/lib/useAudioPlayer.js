@@ -64,7 +64,14 @@ function useAudioPlayer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audio]);
 
-  return { isPlaying, handleClick, trackIdPlaying };
+  const stopTrack = () => {
+    audio.pause();
+    audio.currentTime = 0;
+    setIsPlaying(false);
+    trackIdPlaying.current = null;
+  };
+
+  return { isPlaying, handleClick, trackIdPlaying, stopTrack };
 }
 
 export default useAudioPlayer;
