@@ -22,9 +22,9 @@ function ContinuousSlider(props) {
     //  eslint-disable-next-line react/prop-types
     <Box sx={{ width: 150 }} className={props.className}>
       <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
-        {/* eslint-disable-next-line react/prop-types */}
         <Slider
           aria-label="Volume"
+          /* eslint-disable-next-line react/prop-types */
           value={props.value}
           onChange={handleChange}
           // sx={{
