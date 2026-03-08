@@ -1,4 +1,5 @@
 import TrackCard from "@/components/TrackCard";
+import HorizontalScrollWithArrows from "@/components/HorizontalScrollWithArrows";
 import tracksData from "../data/tracks";
 import useAudioPlayer from "../lib/useAudioPlayer";
 
@@ -16,10 +17,7 @@ const Tracks = () => {
         <h1 className="text-gray-400 font-medium text-xl bg-slate-800 bg-opacity-50 rounded-full inline-block px-5 py-2 ">
           Tracks
         </h1>
-        <div
-          id="trackCards"
-          className="flex items-center gap-5 lg:justify-between overflow-x-auto"
-        >
+        <HorizontalScrollWithArrows contentClassName="lg:justify-between">
           {tracksData.map((track, index) => {
             return (
               <TrackCard
@@ -35,7 +33,7 @@ const Tracks = () => {
               />
             );
           })}
-        </div>
+        </HorizontalScrollWithArrows>
       </div>
     </>
   );
