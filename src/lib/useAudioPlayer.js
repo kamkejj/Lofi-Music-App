@@ -61,6 +61,7 @@ function useAudioPlayer() {
     } else {
       console.log("No audio selected");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audio]);
 
   return { isPlaying, handleClick, trackIdPlaying };
