@@ -28,4 +28,4 @@ src-tauri/target/
 src-tauri/gen/
 
 # Tracks files
-public/assets/sound/track/winter-lofi-mix-relaxing-music-to-chill-study.mp3
+/public/assets/sound/track/winter-lofi-mix-relaxing-music-to-chill-study.mp3
