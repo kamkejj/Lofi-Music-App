@@ -26,3 +26,6 @@ dist-ssr
 # Tauri (Rust build output and generated files)
 src-tauri/target/
 src-tauri/gen/
+
+# Tracks files
+public/assets/sound/track/winter-lofi-mix-relaxing-music-to-chill-study.mp3
